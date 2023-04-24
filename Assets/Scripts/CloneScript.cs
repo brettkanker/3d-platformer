@@ -39,6 +39,13 @@ public class CloneScript : MonoBehaviour
             }
             else
             {
+                // If the clone camera is not enabled, switch to the player camera
+                if (cloneCamera.enabled)
+                {
+                    playerCamera.enabled = true;
+                    cloneCamera.enabled = false;
+                }
+
                 // destroy the clone and set cloneCreated to false
                 Destroy(clone);
                 cloneCreated = false;
