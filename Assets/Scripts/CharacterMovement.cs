@@ -24,14 +24,20 @@ public class CharacterMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        groundedPlayer = controller.isGrounded;
-        ResetPlayerVelocityY();
-        Jump();
-        ChangeWalkSpeed();
-        Vector3 move = Move();
-        ApplyGravity();
-        RotateIntoMoveDirection(move);
-        
+        if (Input.GetKeyDown(KeyCode.R))
+        {
+
+        }
+        else
+        {
+            groundedPlayer = controller.isGrounded;
+            ResetPlayerVelocityY();
+            Jump();
+            ChangeWalkSpeed();
+            Vector3 move = Move();
+            ApplyGravity();
+            RotateIntoMoveDirection(move);
+        }  
     }
 
     private Vector3 Move()

@@ -10,7 +10,7 @@ public class CloneScript : MonoBehaviour
     public Transform bodyTransform;
 
     private GameObject clone;
-    private bool cloneCreated = false;
+    public static bool cloneCreated = false;
 
 
     void Start()
