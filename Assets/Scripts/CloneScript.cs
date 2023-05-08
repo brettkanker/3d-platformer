@@ -8,6 +8,8 @@ public class CloneScript : MonoBehaviour
     public Camera playerCamera;
     public Camera cloneCamera;
     public Transform bodyTransform;
+    [SerializeField]
+    private float cloneDistance = 5f;
 
     private GameObject clone;
     public static bool cloneCreated = false;
@@ -24,7 +26,7 @@ public class CloneScript : MonoBehaviour
         {
             if (!cloneCreated)
             {
-                Vector3 spawnPosition = bodyTransform.position + Vector3.right * 5f;
+                Vector3 spawnPosition = bodyTransform.position + Vector3.right * cloneDistance;
                 clone = Instantiate(playerPrefab, spawnPosition, transform.rotation);
 
                 // Find the clone camera component in the clone object's hierarchy
@@ -34,6 +36,9 @@ public class CloneScript : MonoBehaviour
                 // Disable the audio listener of the clone camera
                 AudioListener cloneAudioListener = cloneCamera.GetComponent<AudioListener>();
                 cloneAudioListener.enabled = false;
+
+                // Set the x position of the cloneCamera to 0.5
+                cloneCamera.transform.localPosition = new Vector3(0.5f, cloneCamera.transform.localPosition.y, cloneCamera.transform.localPosition.z);
 
                 cloneCreated = true;
             }

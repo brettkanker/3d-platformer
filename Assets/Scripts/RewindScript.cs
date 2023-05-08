@@ -12,7 +12,6 @@ public class RewindScript : MonoBehaviour
         if (transform.position.y < heightThreshold && Input.GetKey(KeyCode.R))
         {
             transform.position = respawnPoint.position;
-            Debug.Log("R pressed");
 
             // Destroy the clone game object if it exists
             GameObject clone = GameObject.Find("Player(Clone)");
@@ -29,7 +28,6 @@ public class RewindScript : MonoBehaviour
         if (other.CompareTag("Checkpoint"))
         {
             respawnPoint = other.transform;
-            Debug.Log("Respawn point set to: " + respawnPoint.position);
         }
     }
 }
