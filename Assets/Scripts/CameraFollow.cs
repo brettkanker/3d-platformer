@@ -28,18 +28,22 @@ public class CameraFollow : MonoBehaviour
             {
                 gameObject.transform.position = target.position + offset;
             }
+            else
+            {
+                //gameObject.transform.position.x = target.position.x + offset.x;
+                Vector3 newPosition = new Vector3(target.position.x + offset.x, transform.position.y, transform.position.z);
+                transform.position = newPosition;
+            }
         }
     }
 
     private void OnTriggerEnter(Collider other)
     {
         isColliding = true;
-        Debug.Log(isColliding);
     }
 
     private void OnTriggerExit(Collider other)
     {
         isColliding = false;
-        Debug.Log(isColliding);
     }
 }

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class RewindScript : MonoBehaviour
 {
@@ -11,7 +12,29 @@ public class RewindScript : MonoBehaviour
     {
         if (transform.position.y < heightThreshold && Input.GetKey(KeyCode.R))
         {
-            transform.position = respawnPoint.position;
+            RespawnPlayer();
+        }
+    }
+
+    void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Checkpoint"))
+        {
+            respawnPoint = other.transform;
+            Debug.Log("Respawnpoint");
+        }
+    }
+
+    public void RespawnPlayer()
+    {
+        if(respawnPoint != null)
+        {
+            // Reset the player's position to the respawn point
+            GameObject player = GameObject.Find("Player"); ///////////////////
+            if (player != null)
+            {
+                player.transform.position = respawnPoint.position;
+            }
 
             // Destroy the clone game object if it exists
             GameObject clone = GameObject.Find("Player(Clone)");
@@ -21,13 +44,10 @@ public class RewindScript : MonoBehaviour
                 CloneScript.cloneCreated = false;
             }
         }
-    }
-
-    void OnTriggerEnter(Collider other)
-    {
-        if (other.CompareTag("Checkpoint"))
+        else
         {
-            respawnPoint = other.transform;
+            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         }
+            
     }
 }
