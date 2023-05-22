@@ -21,28 +21,33 @@ public class RewindScript : MonoBehaviour
         if (other.CompareTag("Checkpoint"))
         {
             respawnPoint = other.transform;
-            Debug.Log("Respawnpoint");
+            Debug.Log("Respawn point set to: " + respawnPoint.position);
         }
     }
 
     public void RespawnPlayer()
     {
-        if(respawnPoint != null)
+        // Destroy the clone game object if it exists
+        if (respawnPoint != null)
         {
-            // Reset the player's position to the respawn point
-            GameObject player = GameObject.Find("Player"); ///////////////////
-            if (player != null)
-            {
-                player.transform.position = respawnPoint.position;
-            }
-
-            // Destroy the clone game object if it exists
             GameObject clone = GameObject.Find("Player(Clone)");
             if (clone != null)
             {
                 Destroy(clone);
                 CloneScript.cloneCreated = false;
+                Debug.Log("Destroyed clone");
             }
+
+            // Reset the player's position to the respawn point
+            GameObject player = GameObject.Find("Player");
+            Debug.Log(player.transform.position);
+            if (player != null)
+            {
+                player.transform.position = respawnPoint.position;
+                Debug.Log("teleported");
+                Debug.Log(player.transform.position);
+            }
+            
         }
         else
         {
