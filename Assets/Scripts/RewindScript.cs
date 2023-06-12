@@ -5,12 +5,12 @@ using UnityEngine.SceneManagement;
 
 public class RewindScript : MonoBehaviour
 {
-    public Transform respawnPoint;
+    public static Transform respawnPoint;
     private float heightThreshold = -2f; // 2 units bellow y=0
 
     void LateUpdate()
     {
-        if (transform.position.y < heightThreshold && Input.GetKey(KeyCode.R))
+        if (Input.GetKey(KeyCode.R))
         {
             RespawnPlayer();
         }
@@ -20,7 +20,7 @@ public class RewindScript : MonoBehaviour
     {
         if (other.CompareTag("Checkpoint"))
         {
-            respawnPoint = other.transform;
+            respawnPoint = other.gameObject.transform;
             Debug.Log("Respawn point set to: " + respawnPoint.position);
         }
     }
@@ -39,13 +39,13 @@ public class RewindScript : MonoBehaviour
             }
 
             // Reset the player's position to the respawn point
-            GameObject player = GameObject.Find("Player");
-            Debug.Log(player.transform.position);
+            Transform player = GameObject.Find("Player").transform.Find("Body");
+            Debug.Log(player.position);
             if (player != null)
             {
-                player.transform.position = respawnPoint.position;
+                player.position = respawnPoint.position;
                 Debug.Log("teleported");
-                Debug.Log(player.transform.position);
+                Debug.Log(player.position);
             }
             
         }
