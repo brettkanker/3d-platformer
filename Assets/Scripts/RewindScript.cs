@@ -21,7 +21,6 @@ public class RewindScript : MonoBehaviour
         if (other.CompareTag("Checkpoint"))
         {
             respawnPoint = other.gameObject.transform;
-            Debug.Log("Respawn point set to: " + respawnPoint.position);
         }
     }
 
@@ -35,23 +34,20 @@ public class RewindScript : MonoBehaviour
             {
                 Destroy(clone);
                 CloneScript.cloneCreated = false;
-                Debug.Log("Destroyed clone");
             }
 
             // Reset the player's position to the respawn point
             Transform player = GameObject.Find("Player").transform.Find("Body");
-            Debug.Log(player.position);
             if (player != null)
             {
                 player.position = respawnPoint.position;
-                Debug.Log("teleported");
-                Debug.Log(player.position);
             }
             
         }
         else
         {
             SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+            CloneScript.cloneCreated = false;
         }
             
     }
